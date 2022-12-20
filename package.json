@@ -1,5 +1,5 @@
 {
-  "name": "georeferenced-media",
+  "name": "@vernonia/georeferenced-media",
   "version": "1.0.0",
   "description": "Tools to display media georeferenced with ArcGIS in a web map.",
   "scripts": {
