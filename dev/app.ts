@@ -8,7 +8,12 @@ import Basemap from '@arcgis/core/Basemap';
 import MapView from '@arcgis/core/views/MapView';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 
-import { parseGeoXML } from './../src/Georef2Media';
+import {
+  imageMediaLayer,
+  auxiliaryXmlToControlPoints,
+  displayControlPoints,
+  clearControlPoints,
+} from '../src/GeoreferencedMedia';
 
 esriConfig.portalUrl = 'https://gis.vernonia-or.gov/portal';
 
@@ -21,11 +26,11 @@ const load = async (): Promise<void> => {
 
   await cityLimits.load();
 
-  new MapView({
+  const view = new MapView({
     map: new Map({
       basemap: new Basemap({
         portalItem: {
-          id: '6e9f78f3a26f48c89575941141fd4ac3',
+          id: '2622b9aecacd401583981410e07d5bb9',
         },
       }),
       layers: [cityLimits],
@@ -34,7 +39,45 @@ const load = async (): Promise<void> => {
     container: 'view-div',
   });
 
-  parseGeoXML();
+  const url = 'https://cityofvernonia.github.io/vernonia-tax-maps/tax-maps/jpg/4403.jpg';
+
+  const mediaLayer = await imageMediaLayer(url, {
+    title: 'Georeferenced image',
+    copyright: 'Squirrels',
+    opacity: 0.4,
+  });
+  view.map.add(mediaLayer, 0);
+  await mediaLayer.when();
+  view.goTo(mediaLayer.fullExtent);
+
+  /**
+   * Can also be added directly as a Promise which returns a layer.
+   */
+  // view.map.add(imageMediaLayer(url, {
+  //   title: 'Georeferenced image',
+  //   copyright: 'Squirrels',
+  //   opacity: 0.5,
+  // }));
+
+  /**
+   * Add via `then()`.
+   */
+  // imageMediaLayer(url, {
+  //   title: 'Georeferenced image',
+  //   copyright: 'Squirrels',
+  //   opacity: 0.5,
+  // }).then((layer: esri.MediaLayer): void => {
+  //   view.map.add(layer);
+  // });
+
+  const { controlPoints, spatialReference } = await auxiliaryXmlToControlPoints(`${url}.aux.xml`);
+  console.log(controlPoints, spatialReference);
+
+  displayControlPoints(mediaLayer, view);
+
+  setTimeout((): void => {
+    clearControlPoints(view);
+  }, 10000);
 };
 
 load();

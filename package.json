@@ -1,8 +1,7 @@
 {
-  "name": "georef2media",
+  "name": "georeferenced-media",
   "version": "1.0.0",
-  "description": "a thing",
-  "main": "main.js",
+  "description": "Tools to display media georeferenced with ArcGIS in a web map.",
   "scripts": {
     "build": "tsc",
     "dev": "vite",
@@ -12,17 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CityOfVernonia/georef2media.git"
+    "url": "git+https://github.com/CityOfVernonia/georeferenced-media.git"
   },
   "author": "COV-GIS",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/CityOfVernonia/georef2media/issues"
+    "url": "https://github.com/CityOfVernonia/georeferenced-media/issues"
   },
-  "homepage": "https://github.com/CityOfVernonia/georef2media#readme",
+  "homepage": "https://github.com/CityOfVernonia/georeferenced-media#readme",
   "devDependencies": {
     "@types/js-cookie": "^3.0.2",
-    "@types/sortablejs": "^1.15.0",
+    "@types/node": "^18.11.17",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "eslint": "^8.29.0",
