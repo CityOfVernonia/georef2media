@@ -7,6 +7,10 @@ import Map from '@arcgis/core/Map';
 import Basemap from '@arcgis/core/Basemap';
 import MapView from '@arcgis/core/views/MapView';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
+import GeoJSONLayer from '@arcgis/core/layers/GeoJSONLayer';
+import { SimpleRenderer } from '@arcgis/core/renderers';
+import { SimpleFillSymbol, TextSymbol } from '@arcgis/core/symbols';
+import LabelClass from '@arcgis/core/layers/support/LabelClass';
 
 import {
   imageMediaLayer,
@@ -33,13 +37,40 @@ const load = async (): Promise<void> => {
           id: '2622b9aecacd401583981410e07d5bb9',
         },
       }),
-      layers: [cityLimits],
+      layers: [
+        new GeoJSONLayer({
+          url: 'https://cityofvernonia.github.io/vernonia-tax-maps/TaxMapBoundaries.geojson',
+          outFields: ['*'],
+          renderer: new SimpleRenderer({
+            symbol: new SimpleFillSymbol({
+              color: [0, 0, 0, 0],
+              outline: {
+                color: 'yellow',
+                width: 1.25,
+              },
+            }),
+          }),
+          labelingInfo: [
+            new LabelClass({
+              labelExpressionInfo: {
+                expression: '$feature.MAP_NAME',
+              },
+              symbol: new TextSymbol({
+                color: 'yellow',
+                haloColor: [0, 0, 0, 0.5],
+                haloSize: 1.25,
+              }),
+            }),
+          ],
+        }),
+        cityLimits,
+      ],
     }),
     extent: cityLimits.fullExtent.clone(),
     container: 'view-div',
   });
 
-  const url = 'https://cityofvernonia.github.io/vernonia-tax-maps/tax-maps/jpg/4403.jpg';
+  const url = 'https://cityofvernonia.github.io/vernonia-tax-maps/tax-maps/jpg/4404CB.jpg';
 
   const mediaLayer = await imageMediaLayer(url, {
     title: 'Georeferenced image',

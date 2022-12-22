@@ -8,9 +8,15 @@ Tools to display media georeferenced with ArcGIS in a web map.
 npm i @vernonia/georeferenced-media
 ```
 
+### Important
+
+`*.aux.xml` files must only contain a single georeference which contains control points. Translation, rotation or multiple georeferences are not supported.
+
 ### Use
 
-`imageMediaLayer(url: string, mediaLayerProperties?: esri.MediaLayerProperties ): Promise<esri.MediaLayer>`
+```
+imageMediaLayer(url: string, mediaLayerProperties?: esri.MediaLayerProperties ): Promise<esri.MediaLayer>
+````
 
 | Parameter              | Type                      | Notes                                                                                       |
 | ---------------------- | ------------------------- | ------------------------------------------------------------------------------------------- |
@@ -69,15 +75,21 @@ import {
 
 Parse auxiliary XML and get control points.
 
-`auxiliaryXmlToControlPoints(url: string): Promise<{ controlPoints: esri.ControlPoint[]; spatialReference: esri.SpatialReference; }>`
+```
+auxiliaryXmlToControlPoints(url: string): Promise<{ controlPoints: esri.ControlPoint[]; spatialReference: esri.SpatialReference; }>
+```
 
 Display media layer control points.
 
-`displayControlPoints(mediaLayer: esri.MediaLayer, view: esri.MapView): void`
+```
+displayControlPoints(mediaLayer: esri.MediaLayer, view: esri.MapView): void
+```
 
 Clear media layer control points.
 
-`clearControlPoints(view: esri.MapView): void`
+```
+clearControlPoints(view: esri.MapView): void
+```
 
 ***
 
