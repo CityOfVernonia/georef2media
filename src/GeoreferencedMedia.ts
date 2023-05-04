@@ -168,9 +168,10 @@ export const imageMediaLayer = async (
  * @param view View to display points in
  */
 export const displayControlPoints = (mediaLayer: esri.MediaLayer, view: esri.MapView): void => {
-  if (!mediaLayer.source || !mediaLayer.source.elements.length) return;
+  if (!mediaLayer.source || !(mediaLayer.source as esri.LocalMediaElementSource).elements.length) return;
   (
-    (mediaLayer.source.elements.getItemAt(0) as esri.ImageElement).georeference as esri.ControlPointsGeoreference
+    ((mediaLayer.source as esri.LocalMediaElementSource).elements.getItemAt(0) as esri.ImageElement)
+      .georeference as esri.ControlPointsGeoreference
   ).controlPoints.forEach((controlPoint: esri.ControlPoint): void => {
     const graphic = new Graphic({
       geometry: controlPoint.mapPoint?.clone(),

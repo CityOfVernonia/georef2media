@@ -133,7 +133,8 @@ export const imageMediaLayer = (url, mediaLayerProperties) => __awaiter(void 0, 
 export const displayControlPoints = (mediaLayer, view) => {
     if (!mediaLayer.source || !mediaLayer.source.elements.length)
         return;
-    mediaLayer.source.elements.getItemAt(0).georeference.controlPoints.forEach((controlPoint) => {
+    mediaLayer.source.elements.getItemAt(0)
+        .georeference.controlPoints.forEach((controlPoint) => {
         var _a;
         const graphic = new Graphic({
             geometry: (_a = controlPoint.mapPoint) === null || _a === void 0 ? void 0 : _a.clone(),
