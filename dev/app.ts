@@ -53,7 +53,7 @@ const load = async (): Promise<void> => {
           labelingInfo: [
             new LabelClass({
               labelExpressionInfo: {
-                expression: '$feature.MAP_NAME',
+                expression: '$feature.name',
               },
               symbol: new TextSymbol({
                 color: 'yellow',
