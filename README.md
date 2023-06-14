@@ -14,9 +14,9 @@ npm i @vernonia/georeferenced-media
 
 ### Use
 
-```
+```typescript
 imageMediaLayer(url: string, mediaLayerProperties?: esri.MediaLayerProperties ): Promise<esri.MediaLayer>
-````
+```
 
 | Parameter              | Type                      | Notes                                                                                       |
 | ---------------------- | ------------------------- | ------------------------------------------------------------------------------------------- |
@@ -75,19 +75,19 @@ import {
 
 Parse auxiliary XML and get control points.
 
-```
+```typescript
 auxiliaryXmlToControlPoints(url: string): Promise<{ controlPoints: esri.ControlPoint[]; spatialReference: esri.SpatialReference; }>
 ```
 
 Display media layer control points.
 
-```
+```typescript
 displayControlPoints(mediaLayer: esri.MediaLayer, view: esri.MapView): void
 ```
 
 Clear media layer control points.
 
-```
+```typescript
 clearControlPoints(view: esri.MapView): void
 ```
 
